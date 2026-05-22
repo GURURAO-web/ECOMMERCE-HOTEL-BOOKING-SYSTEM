@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation - Hotel Reservation System</title>
+    <link rel="stylesheet" href="style.css">
+   
+</head>
+
+<body>
+
+      <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">
+            <img src="logo2.jpg" alt="Hotel Logo">
+        </div>
+        <div class="title">
+            HOTEL RESERVATION
+        </div>
+        <div class="nav-links">
+             <a href="home.html" class="login-btn" style="margin-right: 15px; text-decoration: none; font-weight: bold;">Home</a>
+              <a href="signup.html" class="login-btn" style="margin-right: 15px; text-decoration: none; font-weight: bold;">Sign Up</a>
+           <a href="login.html" class="login-btn" style="margin-right: 15px; text-decoration: none; font-weight: bold;">Login</a>
+            <a href="reservation.html" class="login-btn" style="margin-right: 15px; text-decoration: none; font-weight: bold;">Reservation</a>
+              <a href="about.html" class="login-btn" style="margin-right: 15px; text-decoration: none; font-weight: bold;">About</a>
+              <a href="contact.html" class="login-btn" style="margin-right: 15px; text-decoration: none; font-weight: bold;">Contact</a>
+        </div>
+    </div>
+
+        
+    
+    
+   <!-- Small Logout Button Below Navbar -->
+<div style="text-align: left; margin: 10px 20px;">
+    <button onclick="logout()" 
+            style="padding: 6px 12px; 
+                   font-size: 14px; 
+                   background-color: red; 
+                   color: white; 
+                   border: none; 
+                   border-radius: 5px; 
+                   cursor: pointer;">
+        Logout
+    </button>
+</div>
+
+
+
+   <div class="search-bar-container">
+    <h5>Check Room Availability</h5>
+    <div class="search-box-wrapper">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search room type" onkeyup="filterRooms()">
+    </div>
+</div>
+
+
+
+    <!-- Room Selection -->
+    <div style="text-align: center; margin-top: 10px;">
+        <h1>Bookings</h1>
+        <h2>Select Your Room</h2>
+    </div>
+
+   <div style="overflow-x: auto; white-space: nowrap; padding: 20px;">
+  <div style="display: flex; gap: 30px; min-width: max-content;">
+    
+    <!-- Single Room -->
+    <div style="border: 1px solid #ccc; padding: 20px; border-radius: 10px; width: 300px; background-color: goldenrod; display: inline-block;">
+        <h2 class="room-title">Single Room</h2>
+        <img src="single.jpeg" alt="Single Room" style="width: 100%; border-radius: 10px;">
+        <h3>Single Room - ₹500 / Day</h3>
+        <ul style="text-align: left;">
+            <li>1 Single Bed</li>
+            <li>Private Balcony</li>
+            <li>Attached Washroom</li>
+            <li>Free Wi-Fi</li>
+            <li>Max Guest:2</li>
+        </ul>
+        
+        <a href="#reservationForm" onclick="selectRoom('Single Room')" style="text-decoration: none; color: white; background-color: #4CAF50; padding: 10px 20px; border-radius: 5px; display: inline-block; margin-top: 10px;">Select</a>
+    </div>
+
+    <!-- Double Room -->
+    <div style="border: 1px solid #ccc; padding: 20px; border-radius: 10px; width: 300px; background-color: goldenrod; display: inline-block;">
+        <h2 class="room-title">Double Room</h2>
+        <img src="double2.jpg" alt="Double Room" style="width: 100%; border-radius: 10px;">
+        <h3>Double Room - ₹1000 / Day</h3>
+        <ul style="text-align: left;">
+            <li>2 Double Beds</li>
+            <li>Private Balcony</li>
+            <li>Luxury Washroom</li>
+            <li>Free Wi-Fi & Breakfast</li>
+            <li>Max Guest:4</li>
+        </ul>
+        <a href="#reservationForm" onclick="selectRoom('Double Room')" style="text-decoration: none; color: white; background-color: #4CAF50; padding: 10px 20px; border-radius: 5px; display: inline-block; margin-top: 10px;">Select</a>
+    </div>
+
+    <!-- Deluxe Room -->
+    <div style="border: 1px solid #ccc; padding: 20px; border-radius: 10px; width: 300px; background-color: goldenrod; display: inline-block;">
+        <h2 class="room-title">Deluxe Room</h2>
+        <img src="suite room.jpg" alt="Deluxe Room" style="width: 100%; border-radius: 10px;">
+        <h3>Deluxe Room - ₹1500 / Day</h3>
+        <ul style="text-align: left;">
+            <li>1 King Bed</li>
+            <li>Private Balcony</li>
+            <li>Luxury Bathroom</li>
+            <li>Mini Bar & Free Wi-Fi</li>
+            <li>Max Guest:2</li>
+        </ul>
+        <a href="#reservationForm" onclick="selectRoom('Deluxe Room')" style="text-decoration: none; color: white; background-color: #4CAF50; padding: 10px 20px; border-radius: 5px; display: inline-block; margin-top: 10px;">Select</a>
+    </div>
+
+    <!-- Suite Room -->
+    <div style="border: 1px solid #ccc; padding: 20px; border-radius: 10px; width: 300px; background-color: goldenrod; display: inline-block;">
+        <h2 class="room-title">Suite Room</h2>
+        <img src="deluxe.jpg" alt="Suite Room" style="width: 100%; border-radius: 10px;">
+        <h3>Suite Room - ₹2500 / Day</h3>
+        <ul style="text-align: left;">
+            <li>2 King Beds</li>
+            <li>Living Area + Balcony</li>
+            <li>Luxury Bath + Jacuzzi</li>
+            <li>TV, Wi-Fi, Breakfast</li>
+            <li>Max Guest:4</li>
+        </ul>
+        <a href="#reservationForm" onclick="selectRoom('Suite Room')" style="text-decoration: none; color: white; background-color: #4CAF50; padding: 10px 20px; border-radius: 5px; display: inline-block; margin-top: 10px;">Select</a>
+    </div>
+
+    <!-- Family Room -->
+    <div style="border: 1px solid #ccc; padding: 20px; border-radius: 10px; width: 300px; background-color: goldenrod; display: inline-block;">
+        <h2 class="room-title">Family Room</h2>
+        <img src="family room.jpg" alt="Family Room" style="width: 100%; border-radius: 10px;">
+        <h3>Family Room - ₹2500 / Day</h3>
+        <ul style="text-align: left;">
+            <li>2 Double Beds</li>
+            <li>Spacious Living</li>
+            <li>Kids Play Area</li>
+            <li>TV, Free Wi-Fi, Breakfast</li>
+            <li>Max Guest:8</li>
+        </ul>
+        <a href="#reservationForm" onclick="selectRoom('Family Room')" style="text-decoration: none; color: white; background-color: #4CAF50; padding: 10px 20px; border-radius: 5px; display: inline-block; margin-top: 10px;">Select</a>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- Reservation Page -->
+<div style="max-width: 500px; margin: 50px auto; padding: 20px; background: rgba(255, 255, 255, 0.8); border-radius: 10px;">
+  <h2 style="text-align: center;">Reservation Form</h2>
+  
+  <!-- ✅ Only form has id="reservationForm" -->
+  <form id="reservationForm">
+    <input type="text" id="fullName" placeholder="Full Name" required style="width: 100%; padding: 10px; margin-bottom: 10px;">
+    <input type="text" id="contactNumber" placeholder="Contact Number" required style="width: 100%; padding: 10px; margin-bottom: 10px;">
+    <input type="email" id="email" placeholder="Email" required style="width: 100%; padding: 10px; margin-bottom: 10px;">
+    
+    <label>Check-in Date:</label>
+    <input type="date" id="checkIn" required style="width: 100%; padding: 10px; margin-bottom: 10px;">
+    
+    <label>Check-out Date:</label>
+    <input type="date" id="checkOut" required style="width: 100%; padding: 10px; margin-bottom: 10px;">
+    
+    <input type="number" id="guests" placeholder="Number of Guests" required style="width: 100%; padding: 10px; margin-bottom: 10px;">
+    
+    <label>Room Type:</label>
+    <input type="text" id="roomType" readonly style="width: 100%; padding: 10px; margin-bottom: 10px;">
+
+    <button type="submit" style="width: 100%; padding: 10px; background: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Reserve Now</button>
+  </form>
+</div>
+
+<!-- 🟢 Protect reservation page -->
+<script>
+  if (!localStorage.getItem("token")) {
+    alert("You must be logged in to view this page.");
+    window.location.href = "login.html";
+  }
+</script>
+
+<!-- 🟢 Room Prices + Guest Limits -->
+<script>
+  const roomPrices = {
+    "Single Room": 500,
+    "Double Room": 1000,
+    "Deluxe Room": 1500,
+    "Suite Room": 2500,
+    "Family Room": 2500
+  };
+
+  const roomGuestLimits = {
+    "Single Room": 2,
+    "Double Room": 4,
+    "Deluxe Room": 2,
+    "Suite Room": 4,
+    "Family Room": 8
+  };
+
+  function selectRoom(roomType) {
+    document.getElementById('roomType').value = roomType;
+    document.getElementById('reservationForm').scrollIntoView({ behavior: 'smooth' });
+  }
+</script>
+
+<!-- 🟢 Submit reservation to backend with validation -->
+<script>
+document.getElementById("reservationForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const token = localStorage.getItem("token");
+  if (!token) {
+    alert("Please login first.");
+    window.location.href = "login.html";
+    return;
+  }
+
+  const checkIn = new Date(document.getElementById('checkIn').value);
+  const checkOut = new Date(document.getElementById('checkOut').value);
+  const guests = parseInt(document.getElementById('guests').value, 10);
+  const roomType = document.getElementById('roomType').value;
+
+  // 🛑 Validate dates
+  if (checkOut <= checkIn) {
+    alert("Check-out date must be after check-in date.");
+    return;
+  }
+
+  // 🛑 Validate guest count
+  const maxGuests = roomGuestLimits[roomType] || 0;
+  if (guests > maxGuests) {
+    alert(`${roomType} allows a maximum of ${maxGuests} guest(s). Please reduce the number of guests.`);
+    return;
+  }
+
+  const payload = {
+    fullName: document.getElementById('fullName').value,
+    contactNumber: document.getElementById('contactNumber').value,
+    email: document.getElementById('email').value,
+    checkIn: document.getElementById('checkIn').value,
+    checkOut: document.getElementById('checkOut').value,
+    guests,
+    roomType
+  };
+
+  try {
+    const res = await fetch("http://localhost:4000/api/reservations", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      alert("✅ Reservation saved to database! Reservation ID: " + data.id);
+      this.reset();
+    } else {
+      alert("❌ " + (data.message || "Reservation failed"));
+    }
+  } catch (err) {
+    alert("⚠️ Can’t reach the server. Is the backend running?");
+  }
+});
+</script>
+
+<!-- 🟢 Logout function -->
+<script>
+  function logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    window.location.href = 'login.html';
+  }
+</script>
+
+
+
+</body>
+
+</html>

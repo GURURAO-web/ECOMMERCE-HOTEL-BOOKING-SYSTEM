@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Hotel Reservation System</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .password-requirements {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+            text-align: left;
+            max-width: 300px;
+            margin: 5px auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">
+            <img src="logo2.jpg" alt="Hotel Logo">
+        </div>
+        <div class="title">
+            HOTEL RESERVATION
+        </div>
+        <div class="nav-links">
+            <a href="home.html" class="login-btn" style="margin-right: 15px; text-decoration: none; font-weight: bold;">Home</a>
+            <a href="signup.html" class="login-btn" style="margin-right: 15px; text-decoration: none; font-weight: bold; background-color: gray;">Sign Up</a>
+            <a href="login.html" class="login-btn" style="margin-right: 15px; text-decoration: none; font-weight: bold;">Login</a>
+            <a href="reservation.html" class="login-btn" style="margin-right: 15px; text-decoration: none; font-weight: bold;">Reservation</a>
+            <a href="about.html" class="login-btn" style="margin-right: 15px; text-decoration: none; font-weight: bold;">About</a>
+            <a href="contact.html" class="login-btn" style="margin-right: 15px; text-decoration: none; font-weight: bold;">Contact</a>
+        </div>
+    </div>
+   
+
+   <!-- Sign Up Form -->
+<div class="login-container">
+    <h2>Create Your Account</h2>
+    <form id="signupForm">
+        <input type="text" id="fullName" placeholder="Full Name" required>
+        <input type="email" id="email" placeholder="Email Address" required>
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <div class="password-requirements">
+            Password must be at least 8 characters with uppercase, lowercase, and number
+        </div>
+        <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+        <button type="submit">Sign Up</button>
+    </form>
+    <p style="margin-top: 15px;">
+        Already have an account? <a href="login.html" style="color: #4CAF50;">Login</a>
+    </p>
+</div>
+
+<script>
+document.getElementById("signupForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    const fullName = document.getElementById("fullName").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+
+    // Basic validation
+    if (!fullName || !email || !username || !password || !confirmPassword) {
+        alert("Please fill in all fields.");
+        return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        alert("Please enter a valid email address.");
+        return;
+    }
+
+    // Password validation
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+    if (!passwordRegex.test(password)) {
+        alert("Password must be at least 8 characters long and contain uppercase, lowercase letters and a number.");
+        return;
+    }
+
+    if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return;
+    }
+
+    try {
+        const response = await fetch("http://localhost:4000/api/auth/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ fullName, email, username, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            alert("✅ Account created successfully! You can now login.");
+            window.location.href = "login.html";
+        } else {
+            alert("❌ " + data.message);
+        }
+    } catch (err) {
+        alert("Error connecting to server. Please try again later.");
+    }
+});
+
+// Real-time password validation
+document.getElementById("password").addEventListener("input", function() {
+    const password = this.value;
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+    
+    if (password.length > 0 && !regex.test(password)) {
+        this.style.borderColor = "red";
+    } else {
+        this.style.borderColor = "";
+    }
+});
+
+// Confirm password validation
+document.getElementById("confirmPassword").addEventListener("input", function() {
+    const password = document.getElementById("password").value;
+    const confirmPassword = this.value;
+    
+    if (confirmPassword.length > 0 && password !== confirmPassword) {
+        this.style.borderColor = "red";
+    } else {
+        this.style.borderColor = "";
+    }
+});
+</script>
+
+</body>
+</html>
